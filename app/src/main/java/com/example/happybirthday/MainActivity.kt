@@ -2,8 +2,10 @@ package com.example.happybirthday
 
 import android.os.Bundle
 import android.os.Message
+import android.text.style.BackgroundColorSpan
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.ColorRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -153,12 +155,23 @@ fun TaskCheck(
         )
     }
 }
+
+@Composable
+fun FourCompose(modifier: Modifier = Modifier) {
+    Column(
+        modifier
+            .fillMaxSize()
+    ) {
+        Text(text = "test")
+        Text(text = "test")
+    }
+}
+
 @Preview(showBackground =  false)
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthdayTheme {
         //GreetingImage("Happy Birthday Sam!", "From Emma")
-        TaskCheck(stringResource(R.string.first_text),
-            stringResource(R.string.second_text))
+        FourCompose()
     }
 }
