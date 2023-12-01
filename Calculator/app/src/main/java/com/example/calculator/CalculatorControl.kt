@@ -12,7 +12,7 @@ class CalculatorControl {
         print("입력 : ")
         input1 = readLine()!!.toInt()
 
-        println("연산자를 입력하세요...")
+        println("연산자를 입력하세요...(+, -, *, /, %)")
         print("입력 : ")
         inputOperator = readLine()!!
 
@@ -26,7 +26,7 @@ class CalculatorControl {
     fun ContinueOperation() {
         println("현재 값 : $result")
         println("연산을 끝내려면 '='를 입력해주세요.")
-        println("연산을 계속 하려면 연산자를 입력하세요.")
+        println("연산을 계속 하려면 연산자를 입력하세요.(+, -, *, /, %)")
         print("입력 : ")
         inputOperator = readLine()!!
 
