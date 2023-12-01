@@ -8,34 +8,49 @@ class CalculatorControl {
     private var inputOperator : String = ""
 
     fun Start() {
-        println("숫자를 입력하세요...")
-        print("입력 : ")
-        input1 = readLine()!!.toInt()
+
+        input1 = InputNum()
+        InputOperator()
+        input2 = InputNum()
+
+        OperatorStart(inputOperator, input1, input2)
+    }
+
+    fun InputOperator()  {
+        inputOperator = ""
 
         println("연산자를 입력하세요...(+, -, *, /, %)")
         print("입력 : ")
         inputOperator = readLine()!!
 
-        println("숫자를 입력하세요...")
-        print("입력 : ")
-        input2 = readLine()!!.toInt()
+        if (inputOperator != "+" && inputOperator != "-" && inputOperator != "*" && inputOperator != "/" && inputOperator != "%" && inputOperator != "=") {
+            println("연산자가 아닙니다!!")
+            this.InputOperator()
+        }
+    }
 
-        OperatorStart(inputOperator, input1, input2)
+    fun InputNum() : Int {
+        var num = 0
+        try {
+            println("숫자를 입력하세요...")
+            print("입력 : ")
+            num = readLine()!!.toInt()
+        } catch (e:java.lang.NumberFormatException) {
+            println("숫자가 아닙니다!!")
+            this.InputNum()
+        }
+        return num
     }
 
     fun ContinueOperation() {
         println("현재 값 : $result")
         println("연산을 끝내려면 '='를 입력해주세요.")
-        println("연산을 계속 하려면 연산자를 입력하세요.(+, -, *, /, %)")
-        print("입력 : ")
-        inputOperator = readLine()!!
+        print("연산을 계속 하려면 ")
+        InputOperator()
 
         if (inputOperator == "=") println("결과 값은 $result 입니다.")
         else {
-            println("숫자를 입력하세요...")
-            print("입력 : ")
-            input1 = readLine()!!.toInt()
-
+            input1 = InputNum()
             OperatorStart(inputOperator, result.toInt(), input1)
         }
     }
