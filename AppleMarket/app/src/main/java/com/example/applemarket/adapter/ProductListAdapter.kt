@@ -40,7 +40,7 @@ class ProductListAdapter(private val list: MutableList<Product>) :
         fun bind(product: Product) {
             with(product) {
                 productName.text = name
-                pricing.text = price
+                pricing.text = price + "원"
                 region.text = address
                 heartNum.text = like.toString()
                 commentNum.text = comments.toString()

@@ -10,22 +10,23 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/ic_launcher_background"/>
 
     <TextView
         android:id="@+id/product_name"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
         android:text="프라다 복조리백"
         android:textStyle="bold"
         android:textSize="15sp"
+        android:maxLines="2"
+        android:ellipsize="end"
         app:layout_constraintStart_toEndOf="@id/product_image"
-        app:layout_constraintTop_toTopOf="@id/product_image"/>
+        app:layout_constraintTop_toTopOf="@id/product_image" />
 
     <TextView
         android:id="@+id/region_name"
@@ -50,7 +51,7 @@
         android:id="@+id/comment_icon"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginEnd="70dp"
+        android:layout_marginEnd="75dp"
         android:layout_marginBottom="10dp"
         android:src="@drawable/comment_icon"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,6 +60,7 @@
         android:id="@+id/comment_number_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
         android:text="16"
         app:layout_constraintStart_toEndOf="@id/comment_icon"
         app:layout_constraintTop_toTopOf="@id/comment_icon"/>
@@ -75,6 +77,7 @@
         android:id="@+id/heart_number_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
         android:text="25"
         app:layout_constraintStart_toEndOf="@id/heart_icon"
         app:layout_constraintTop_toTopOf="@id/heart_icon"/>

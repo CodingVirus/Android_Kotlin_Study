@@ -21,6 +21,6 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.apply {
             this.adapter = ProductListAdapter(ProductList.list)
         }
-
+        
     }
 }
