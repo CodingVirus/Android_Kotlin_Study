@@ -2,15 +2,20 @@ package com.example.applemarket.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applemarket.data.Product
 import com.example.applemarket.data.ProductList
 import com.example.applemarket.databinding.RecyclerItemBinding
 
-class ProductListAdapter(private val list: MutableList<Product>) :
-    RecyclerView.Adapter<ProductListAdapter.ProductHolder>() {
+class ProductListAdapter(private val list: MutableList<Product>) : RecyclerView.Adapter<ProductListAdapter.ProductHolder>() {
 
+    interface ItemClick {
+        fun onClick(view: View, position: Int)
+    }
+
+    var itemClick : ItemClick? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
         val binding = RecyclerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProductHolder(binding)
@@ -20,13 +25,15 @@ class ProductListAdapter(private val list: MutableList<Product>) :
 
     override fun onBindViewHolder(holder: ProductHolder, position: Int) {
         runCatching {
+            holder.itemView.setOnClickListener {
+                itemClick?.onClick(it, position)
+            }
             list[position].run {
                 holder.bind(this)
             }
         }.onFailure { exception ->
             Log.e("ProductListAdapter", "Exception! ${exception.message}")
         }
-
     }
 
     inner class ProductHolder(binding: RecyclerItemBinding): RecyclerView.ViewHolder(binding.root) {
@@ -39,12 +46,18 @@ class ProductListAdapter(private val list: MutableList<Product>) :
 
         fun bind(product: Product) {
             with(product) {
+                productImg.setImageResource(image)
                 productName.text = name
                 pricing.text = price + "원"
                 region.text = address
                 heartNum.text = like.toString()
                 commentNum.text = comments.toString()
             }
+        }
+
+        fun priceMark(price: String) {
+            val num = price.toInt() / 1000
+
         }
     }
 }
