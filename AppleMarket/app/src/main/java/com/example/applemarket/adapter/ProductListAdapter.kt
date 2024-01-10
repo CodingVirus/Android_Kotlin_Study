@@ -18,6 +18,13 @@ class ProductListAdapter(private val list: MutableList<Product>) : RecyclerView.
 
     var itemClick : ItemClick? = null
 
+    fun removeItem(position: Int) {
+        if (position < list.size) {
+            list.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeRemoved(position, list.size - position)
+        }
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
         val binding = RecyclerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProductHolder(binding)
@@ -59,11 +66,6 @@ class ProductListAdapter(private val list: MutableList<Product>) : RecyclerView.
                 heartNum.text = like.toString()
                 commentNum.text = comments.toString()
             }
-        }
-
-        fun priceMark(price: String) {
-            val num = price.toInt() / 1000
-
         }
     }
 }

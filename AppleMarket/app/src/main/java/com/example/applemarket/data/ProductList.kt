@@ -156,7 +156,15 @@ object ProductList {
         list.add(product)
     }
 
+    fun remove(position: Int) {
+        list.removeAt(position)
+    }
+
     fun get(index: Int): Product {
         return list[index]
+    }
+
+    fun sort() {
+        //list.sort()
     }
 }

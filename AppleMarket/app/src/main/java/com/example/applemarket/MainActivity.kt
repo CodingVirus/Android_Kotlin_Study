@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.applemarket.adapter.ProductListAdapter
+import com.example.applemarket.data.Product
 import com.example.applemarket.data.ProductList
 import com.example.applemarket.databinding.ActivityMainBinding
 
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onLongClick(view: View, position: Int) {
-                exitDialog()
+                removeItemDialog(adapter, position)
             }
         }
 
@@ -105,6 +106,26 @@ class MainActivity : AppCompatActivity() {
             override fun onClick(dialog: DialogInterface?, which: Int) {
                 when(which) {
                     DialogInterface.BUTTON_POSITIVE -> finish()
+                }
+            }
+        }
+        builder.setPositiveButton("확인", listener)
+        builder.setNegativeButton("취소", listener)
+        builder.show()
+    }
+
+    private fun removeItemDialog(adapter: ProductListAdapter, position: Int) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("상품 삭제")
+        builder.setMessage("상품을 정말로 삭제하시겠습니까?")
+        builder.setIcon(R.drawable.comment_icon)
+
+        val listener = object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                when(which) {
+                    DialogInterface.BUTTON_POSITIVE -> {
+                        adapter.removeItem(position)
+                    }
                 }
             }
         }
