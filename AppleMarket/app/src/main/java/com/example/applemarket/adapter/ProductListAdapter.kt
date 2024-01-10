@@ -13,9 +13,11 @@ class ProductListAdapter(private val list: MutableList<Product>) : RecyclerView.
 
     interface ItemClick {
         fun onClick(view: View, position: Int)
+        fun onLongClick(view: View, position: Int)
     }
 
     var itemClick : ItemClick? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
         val binding = RecyclerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProductHolder(binding)
@@ -25,6 +27,10 @@ class ProductListAdapter(private val list: MutableList<Product>) : RecyclerView.
 
     override fun onBindViewHolder(holder: ProductHolder, position: Int) {
         runCatching {
+            holder.itemView.setOnLongClickListener {
+                itemClick?.onLongClick(it, position)
+                false
+            }
             holder.itemView.setOnClickListener {
                 itemClick?.onClick(it, position)
             }
