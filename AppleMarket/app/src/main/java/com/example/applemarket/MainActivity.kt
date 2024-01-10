@@ -1,6 +1,7 @@
 package com.example.applemarket
 
 import android.Manifest
+import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.app.Notification
 import android.app.NotificationChannel
@@ -18,6 +19,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.example.applemarket.adapter.ProductListAdapter
 import com.example.applemarket.data.Product
 import com.example.applemarket.data.ProductList
@@ -36,12 +38,44 @@ class MainActivity : AppCompatActivity() {
 
         createNotificationChannel()
 
-        binding.alarmIcon.setOnClickListener {
-            showNotification()
-        }
-
         val adapter = ProductListAdapter(ProductList.list)
-        binding.recyclerView.adapter = adapter
+
+        with(binding) {
+            alarmIcon.setOnClickListener { showNotification() }
+
+            recyclerView.adapter = adapter
+            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val percent =
+                        recyclerView.computeVerticalScrollOffset() * 1.0 / (recyclerView.computeVerticalScrollRange() - recyclerView.computeVerticalScrollExtent()) * 100
+
+                    if (percent < 10) {
+                        if (binding.floatingButton.alpha >= 1f) {
+                            val fadeIn =
+                                ObjectAnimator.ofFloat(binding.floatingButton, "alpha", 1f, 0f)
+                            fadeIn.duration = 400
+                            fadeIn.start()
+                            //binding.floatingButton.visibility = View.INVISIBLE
+                        }
+
+                    } else {
+                        binding.floatingButton.visibility = View.VISIBLE
+                        if (binding.floatingButton.alpha <= 0f) {
+                            val fadeOut =
+                                ObjectAnimator.ofFloat(binding.floatingButton, "alpha", 0f, 1f)
+                            fadeOut.duration = 400
+                            fadeOut.start()
+
+                        }
+                    }
+                }
+            })
+
+            floatingButton.setOnClickListener {
+                binding.recyclerView.smoothScrollToPosition(0)
+            }
+        }
 
         val intent = Intent(this, DetailPageActivity::class.java)
 
@@ -64,6 +98,7 @@ class MainActivity : AppCompatActivity() {
 
         this.onBackPressedDispatcher.addCallback(this, callback)
        // binding.spinner.onItemSelectedListener = object
+
     }
 
     private fun createNotificationChannel() {

@@ -56,6 +56,7 @@ class ProductListAdapter(private val list: MutableList<Product>) : RecyclerView.
         private val pricing = binding.price
         private val heartNum = binding.heartNumberText
         private val commentNum = binding.commentNumberText
+        private var isHeartFill = false
 
         fun bind(product: Product) {
             with(product) {
@@ -65,6 +66,7 @@ class ProductListAdapter(private val list: MutableList<Product>) : RecyclerView.
                 region.text = address
                 heartNum.text = like.toString()
                 commentNum.text = comments.toString()
+                isHeartFill = isLike
             }
         }
     }
