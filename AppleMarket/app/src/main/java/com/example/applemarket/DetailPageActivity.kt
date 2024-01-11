@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import com.example.applemarket.data.Product
 import com.example.applemarket.data.ProductList
 import com.example.applemarket.databinding.ActivityDetailPageBinding
+import java.text.DecimalFormat
 
 class DetailPageActivity : AppCompatActivity() {
 
@@ -44,7 +45,7 @@ class DetailPageActivity : AppCompatActivity() {
             mainTitleText.text = data.name
             userAddress.text = data.address
             detailExplanationText.text = data.productExplanation
-            priceText.text = data.price + "원"
+            priceText.text = "${DecimalFormat("#,###").format(data.price.toInt())}원"
 
         }
 
