@@ -82,7 +82,7 @@
                     android:layout_marginEnd="50dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/user_name"
-                    android:text="39.3"
+                    android:text="39.3°C"
                     android:textColor="#1ABF7D"
                     android:textSize="17sp"
                     android:textStyle="bold"/>

@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
         adapter.itemClick = object : ProductListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
-                intent.putExtra("key", ProductList.get(position))
+                intent.putExtra(Constants.ITEM_INDEX, ProductList.get(position))
                 startActivity(intent)
             }
 

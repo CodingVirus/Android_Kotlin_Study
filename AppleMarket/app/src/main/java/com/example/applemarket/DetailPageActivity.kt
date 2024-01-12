@@ -32,11 +32,11 @@ class DetailPageActivity : AppCompatActivity() {
         with(binding) {
             val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 intent?.getParcelableExtra(
-                    "key", Product::class.java
+                    Constants.ITEM_INDEX, Product::class.java
                 )
             } else {
                 intent?.getParcelableExtra(
-                    "key"
+                    Constants.ITEM_INDEX
                 )
             }
 
