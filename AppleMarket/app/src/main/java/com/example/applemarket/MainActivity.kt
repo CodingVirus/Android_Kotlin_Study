@@ -16,6 +16,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.ActivityResultLauncher
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -28,6 +29,7 @@ import com.example.applemarket.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var resultLauncher : ActivityResultLauncher<Intent>
     private val channelID = "default"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,6 +84,7 @@ class MainActivity : AppCompatActivity() {
         adapter.itemClick = object : ProductListAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
                 intent.putExtra(Constants.ITEM_INDEX, ProductList.get(position))
+                //resultLauncher.launch(intent)
                 startActivity(intent)
             }
 

@@ -47,7 +47,19 @@ class DetailPageActivity : AppCompatActivity() {
             detailExplanationText.text = data.productExplanation
             priceText.text = "${DecimalFormat("#,###").format(data.price.toInt())}원"
 
-        }
+            if (data.isLike == true) heartIcon.setImageResource(R.drawable.fill_heart_icon)
+            else heartIcon.setImageResource(R.drawable.heart)
 
+            heartIcon.setOnClickListener {
+                if (data.isLike == false) {
+                    data.isLike = true
+                    heartIcon.setImageResource(R.drawable.fill_heart_icon)
+                } else {
+                    data.isLike = false
+                    heartIcon.setImageResource(R.drawable.heart)
+                }
+                intent.putExtra(Constants.ITEM_INDEX, data)
+            }
+        }
     }
 }
